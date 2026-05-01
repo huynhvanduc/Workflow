@@ -24,6 +24,7 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 | 08 | [08-issue-feedback-tracking.md](./08-issue-feedback-tracking.md) | Phản ánh lỗi và theo dõi fix |
 | 09 | [09-governance-and-activation.md](./09-governance-and-activation.md) | Nguyên tắc quản trị và điều kiện kích hoạt |
 | 10 | [10-end-user-checklist.md](./10-end-user-checklist.md) | Checklist cho người dùng cuối |
+| 11 | [11-employee-audit-log.md](./11-employee-audit-log.md) | Audit log cho nhân viên xử lý hồ sơ |
 
 ## Gợi ý thứ tự đọc
 
