@@ -479,7 +479,13 @@ Bắt đầu TESTING
    Mỗi lần tạo bản mới từ workflow active, số version tăng lên. Lịch sử tất cả các version được lưu trữ và có thể tra cứu.
 
 7. **Audit log đầy đủ.**  
-   Mọi thay đổi trạng thái của workflow (ai thay đổi, lúc nào, lý do) đều được ghi nhận.
+   Mọi thay đổi trạng thái của workflow (ai thay đổi, lúc nào, lý do) đều được ghi nhận.  
+   Hệ thống duy trì hai lớp nhật ký:
+
+   - **Case Audit Log:** Ghi mọi hành động của nhân viên nghiệp vụ trên từng hồ sơ (tiếp nhận, phân công, phê duyệt, từ chối, trả lại, ...). Hồ sơ bất biến, chỉ INSERT, lưu trữ tối thiểu 10 năm.
+   - **Config Audit Log:** Ghi mọi thao tác của admin lên cấu hình workflow (tạo, sửa bước, sửa transition, publish, deactivate, ...). Hỗ trợ so sánh diff giữa hai phiên bản.
+
+   Xem chi tiết tại: [11-audit-log.md](../workflow-analysis/11-audit-log.md)
 
 ---
 
