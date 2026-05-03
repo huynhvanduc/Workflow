@@ -25,6 +25,7 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 | 09 | [09-governance-and-activation.md](./09-governance-and-activation.md) | Nguyên tắc quản trị và điều kiện kích hoạt |
 | 10 | [10-end-user-checklist.md](./10-end-user-checklist.md) | Checklist cho người dùng cuối |
 | 11 | [11-audit-log.md](./11-audit-log.md) | Audit Log – Nhật ký thao tác (nhân viên & admin) |
+| 11b | [11-employee-audit-log.md](./11-employee-audit-log.md) | Audit log cho nhân viên xử lý hồ sơ |
 | 12 | [12-technology-analysis.md](./12-technology-analysis.md) | Phân tích công nghệ – stack, kiến trúc, hạ tầng |
 | 13 | [13-challenges-and-risks.md](./13-challenges-and-risks.md) | Dự đoán thách thức và issue có thể xảy ra |
 
