@@ -17,6 +17,7 @@
 6. [Vòng đời quản trị Workflow](#6-vòng-đời-quản-trị-workflow)
 7. [Nguyên tắc quản trị](#7-nguyên-tắc-quản-trị)
 8. [Sơ đồ tổng hợp](#8-sơ-đồ-tổng-hợp)
+9. [Checklist: Đối tượng người dùng cuối (End-User Personas)](#9-checklist-đối-tượng-người-dùng-cuối-end-user-personas)
 
 ---
 
@@ -544,6 +545,76 @@ WorkflowDefinition
     │
     └── Transition (0..n)  [từ Step → Step, điều kiện]
 ```
+
+---
+
+## 9. Checklist: Đối tượng người dùng cuối (End-User Personas)
+
+> Phần này bổ sung góc nhìn của **người dùng cuối / công dân** vào tài liệu phân tích, song song với các vai trò nội bộ đã mô tả ở các mục trước.
+
+### 9.1 Ma trận đối tượng người dùng đầy đủ
+
+| # | Đối tượng | Vai trò chính | Được sử dụng workflow ở trạng thái |
+|---|---|---|---|
+| 1 | **Admin** | Thiết lập, cấu hình, vận hành workflow | DRAFT, READY_FOR_TEST, TESTING, READY_FOR_PRODUCTION, ACTIVE, INACTIVE |
+| 2 | **Tester / User thử nghiệm** | Kiểm thử workflow, ghi nhận và xác nhận lỗi | TESTING |
+| 3 | **Người dùng cuối / Công dân** | Nộp hồ sơ, theo dõi tiến độ, nhận kết quả | **ACTIVE** (chỉ workflow đã kích hoạt chính thức) |
+| 4 | **Cán bộ tiếp nhận** | Nhận, kiểm tra ban đầu, chuyển hồ sơ | ACTIVE |
+| 5 | **Chuyên viên xử lý** | Thẩm định, xử lý nghiệp vụ, trình duyệt | ACTIVE |
+| 6 | **Người phê duyệt** | Phê duyệt / từ chối / ký duyệt hồ sơ | ACTIVE |
+| 7 | **Bộ phận trả kết quả** | Xác nhận hoàn tất, phát hành và trả kết quả | ACTIVE |
+
+---
+
+### 9.2 Checklist – Hành trình người dùng cuối (User-Facing Journey)
+
+Hành trình của người dùng cuối khi tương tác với một hồ sơ qua workflow:
+
+- [ ] **Tạo / Nộp hồ sơ:** Người dùng cuối có thể khởi tạo hồ sơ và nộp vào hệ thống thông qua workflow đang ở trạng thái ACTIVE.
+- [ ] **Nhận xác nhận nộp thành công:** Sau khi nộp, người dùng nhận thông báo xác nhận hồ sơ đã được tiếp nhận vào hệ thống.
+- [ ] **Nhận yêu cầu bổ sung hồ sơ:** Khi cán bộ tiếp nhận phát hiện thiếu sót và thực hiện `REQUEST_SUPPLEMENT`, người dùng nhận thông báo kèm danh sách tài liệu / thông tin cần bổ sung và lý do rõ ràng.
+- [ ] **Nhắc bổ sung đúng hạn:** Nếu người dùng chưa bổ sung trong thời gian quy định, hệ thống gửi thông báo nhắc nhở trước khi hết hạn.
+- [ ] **Nhận cập nhật trạng thái xử lý:** Khi hồ sơ chuyển qua từng bước (tiếp nhận → chuyên môn → phê duyệt), người dùng nhận thông báo về trạng thái hiện tại.
+- [ ] **Nhận thông báo kết quả phê duyệt / từ chối:** Khi lãnh đạo phê duyệt hoặc từ chối hồ sơ, người dùng được thông báo kèm lý do (nếu từ chối).
+- [ ] **Nhận thông báo kết quả sẵn sàng:** Khi hồ sơ đã được xử lý xong và có kết quả, người dùng nhận thông báo có thể đến nhận hoặc tải kết quả.
+- [ ] **Theo dõi tiến độ hồ sơ:** Người dùng có thể xem hồ sơ đang ở bước nào trong quy trình tại bất kỳ thời điểm nào.
+
+---
+
+### 9.3 Checklist – Quy tắc phân tách TESTING / ACTIVE
+
+- [ ] **Workflow ở trạng thái TESTING không được phép sử dụng bởi người dùng cuối thực tế.** Chỉ tester hoặc nhóm user được admin chỉ định mới có quyền thao tác trong giai đoạn này.
+- [ ] **Người dùng cuối chỉ thấy và chỉ sử dụng được workflow đang ở trạng thái ACTIVE.** Các trạng thái DRAFT, READY_FOR_TEST, TESTING, READY_FOR_PRODUCTION, INACTIVE, ARCHIVED đều ẩn hoàn toàn với người dùng cuối.
+- [ ] **Nếu kiểm thử thực hiện trên môi trường production**, phạm vi user tham gia phải được admin giới hạn rõ ràng và không ảnh hưởng đến người dùng cuối không liên quan.
+- [ ] **Dữ liệu hồ sơ trong giai đoạn TESTING** (hồ sơ thử) không được trộn lẫn với dữ liệu hồ sơ thật của người dùng cuối.
+- [ ] **Chỉ khi workflow chuyển sang ACTIVE**, hồ sơ thật của người dùng cuối mới được tiếp nhận và xử lý theo workflow đó.
+
+---
+
+### 9.4 Checklist – Acceptance Criteria từ góc nhìn người dùng cuối
+
+- [ ] Người dùng cuối **chỉ nhìn thấy** các workflow đã được công bố chính thức (ACTIVE); không thể truy cập hoặc vô tình sử dụng workflow đang trong giai đoạn thử nghiệm.
+- [ ] Người dùng cuối **nhận được thông báo đúng thời điểm** khi hồ sơ thay đổi trạng thái, qua kênh push notification (hoặc email / SMS tùy cấu hình).
+- [ ] Người dùng cuối **biết hồ sơ đang ở bước nào** trong quy trình (ví dụ: "Đang thẩm định", "Chờ phê duyệt").
+- [ ] Khi hồ sơ bị yêu cầu bổ sung, người dùng **nhận được lý do rõ ràng** và danh sách cụ thể những gì cần bổ sung.
+- [ ] Khi hồ sơ bị từ chối, người dùng **nhận được lý do từ chối** để có thể khiếu nại hoặc nộp lại nếu phù hợp.
+- [ ] Người dùng cuối **không cần đến quầy hỏi thủ công** để biết trạng thái hồ sơ – hệ thống tự động thông báo tại mỗi bước chuyển trạng thái.
+- [ ] Toàn bộ thông báo gửi đến người dùng cuối phải sử dụng **ngôn ngữ dễ hiểu**, không dùng mã kỹ thuật hoặc thuật ngữ nội bộ.
+
+---
+
+### 9.5 Các trạng thái hồ sơ từ góc nhìn người dùng cuối
+
+| Trạng thái hiển thị | Ý nghĩa với người dùng |
+|---|---|
+| Đã nộp – Chờ tiếp nhận | Hồ sơ đã ghi nhận, đang chờ cán bộ tiếp nhận kiểm tra |
+| Cần bổ sung | Hồ sơ thiếu thông tin / tài liệu, người dùng cần hành động |
+| Đã tiếp nhận – Đang xử lý | Hồ sơ hợp lệ và đang được phòng chuyên môn xử lý |
+| Đang chờ phê duyệt | Hồ sơ đã qua chuyên môn, chờ lãnh đạo ký duyệt |
+| Đã phê duyệt | Hồ sơ được chấp thuận, đang chuẩn bị trả kết quả |
+| Bị từ chối | Hồ sơ không được chấp thuận kèm lý do |
+| Kết quả sẵn sàng | Có thể đến nhận hoặc tải kết quả |
+| Đã trả kết quả | Quy trình hoàn tất |
 
 ---
 
