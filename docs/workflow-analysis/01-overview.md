@@ -112,7 +112,7 @@ Các giả định được đặt ra trong quá trình phân tích:
 
 | # | Giả định |
 |---|----------|
-| 1 | Mỗi loại hồ sơ có thể sử dụng một workflow riêng do admin cấu hình |
+| 1 | Mỗi hồ sơ chỉ áp dụng đúng một workflow tại một thời điểm (không song song nhiều workflow) |
 | 2 | Admin là người dùng hệ thống có quyền cao nhất, được tin tưởng tuyệt đối khi cấu hình |
 | 3 | Giai đoạn thử nghiệm (TESTING) chỉ áp dụng cho user được chỉ định, không phải toàn bộ user |
 | 4 | Khi workflow đang ACTIVE, không chỉnh sửa trực tiếp – mọi thay đổi phải tạo phiên bản mới |
@@ -125,15 +125,15 @@ Các giả định được đặt ra trong quá trình phân tích:
 
 ## Câu hỏi cần chốt thêm
 
-Các câu hỏi nghiệp vụ chưa được xác nhận, cần làm việc với stakeholder:
+Các câu hỏi nghiệp vụ đã được xác nhận với stakeholder:
 
-| # | Câu hỏi | Mức độ ưu tiên | Người phụ trách |
-|---|---------|----------------|-----------------|
-| 1 | Một hồ sơ có thể áp dụng nhiều workflow song song không, hay chỉ dùng một? | Cao | Nghiệp vụ |
-| 2 | Thời gian thử nghiệm tối thiểu bắt buộc là bao lâu? Admin có được rút ngắn không? | Cao | Nghiệp vụ |
-| 3 | Khi workflow ACTIVE bị vô hiệu hóa, hồ sơ đang xử lý dở sẽ xử lý thế nào? | Cao | Kỹ thuật + Nghiệp vụ |
-| 4 | Có cần cơ chế phân quyền theo đơn vị hành chính (tỉnh/huyện/xã) không? | Trung bình | Nghiệp vụ |
-| 5 | Mức độ tùy chỉnh notification theo từng địa phương có được phép không? | Trung bình | Nghiệp vụ |
-| 6 | Có cần audit log cho mọi thao tác cấu hình workflow của admin không? | Trung bình | Kỹ thuật |
-| 7 | Workflow có thể được clone/sao chép từ workflow đã có để tạo nhanh không? | Thấp | Nghiệp vụ |
-| 8 | Ai có quyền DEACTIVATE một workflow đang ACTIVE trong tình huống khẩn cấp? | Cao | Nghiệp vụ |
+| # | Câu hỏi | Mức độ ưu tiên | Người phụ trách | Kết quả xác nhận |
+|---|---------|----------------|-----------------|------------------|
+| 1 | Một hồ sơ có thể áp dụng nhiều workflow song song không, hay chỉ dùng một? | Cao | Nghiệp vụ | ✅ Một hồ sơ chỉ dùng đúng một workflow |
+| 2 | Thời gian thử nghiệm tối thiểu bắt buộc là bao lâu? Admin có được rút ngắn không? | Cao | Nghiệp vụ | ✅ Không có giới hạn tối thiểu bắt buộc; thời gian thử nghiệm do admin chỉ định |
+| 3 | Khi workflow ACTIVE bị vô hiệu hóa, hồ sơ đang xử lý dở sẽ xử lý thế nào? | Cao | Kỹ thuật + Nghiệp vụ | ✅ Hệ thống thông báo yêu cầu người dùng nộp lại hồ sơ (nếu đã có workflow thay thế) hoặc tạm dừng xử lý (nếu chưa có workflow thay thế) |
+| 4 | Có cần cơ chế phân quyền theo đơn vị hành chính (tỉnh/huyện/xã) không? | Trung bình | Nghiệp vụ | ✅ Có |
+| 5 | Mức độ tùy chỉnh notification theo từng địa phương có được phép không? | Trung bình | Nghiệp vụ | ✅ Có |
+| 6 | Có cần audit log cho mọi thao tác cấu hình workflow của admin không? | Trung bình | Kỹ thuật | ✅ Có |
+| 7 | Workflow có thể được clone/sao chép từ workflow đã có để tạo nhanh không? | Thấp | Nghiệp vụ | ✅ Có |
+| 8 | Ai có quyền DEACTIVATE một workflow đang ACTIVE trong tình huống khẩn cấp? | Cao | Nghiệp vụ | ✅ Admin |
