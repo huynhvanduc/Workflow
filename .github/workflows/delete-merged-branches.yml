@@ -1,0 +1,67 @@
+name: Xóa các branch đã merge vào analysis
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Chạy thử (không xóa thật)'
+        required: false
+        default: 'false'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  delete-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Xóa các branch đã được merge vào analysis
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+            const targetBranch = 'analysis';
+            const dryRun = '${{ inputs.dry_run }}' === 'true';
+
+            // Lấy danh sách tất cả các branch
+            const { data: branches } = await github.rest.repos.listBranches({
+              owner,
+              repo,
+              per_page: 100,
+            });
+
+            // Các branch cần giữ lại
+            const keepBranches = [targetBranch];
+
+            const branchesToDelete = branches
+              .map(b => b.name)
+              .filter(name => !keepBranches.includes(name));
+
+            console.log(`Sẽ xóa ${branchesToDelete.length} branch:`);
+            branchesToDelete.forEach(b => console.log(`  - ${b}`));
+
+            if (dryRun) {
+              console.log('\n[DRY RUN] Không xóa thật. Bỏ tùy chọn dry_run để xóa.');
+              return;
+            }
+
+            for (const branch of branchesToDelete) {
+              try {
+                await github.rest.git.deleteRef({
+                  owner,
+                  repo,
+                  ref: `heads/${branch}`,
+                });
+                console.log(`✅ Đã xóa branch: ${branch}`);
+              } catch (error) {
+                console.error(`❌ Lỗi khi xóa branch ${branch}: ${error.message}`);
+              }
+            }
+
+            console.log('\nHoàn thành! Chỉ còn lại branch: analysis');
