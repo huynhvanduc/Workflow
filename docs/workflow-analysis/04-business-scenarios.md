@@ -281,6 +281,37 @@ Tài liệu này liệt kê và mô tả chi tiết 10 tình huống nghiệp v�
 
 ---
 
+### 11. Phê duyệt song song liên phòng ban
+
+**Bối cảnh:** Một hồ sơ (vd: cấp phép xây dựng) cần được phê duyệt đồng thời từ nhiều phòng ban độc lập (Phòng Tài nguyên, Phòng Quy hoạch, Phòng PCCC) trước khi chuyển sang bước tiếp theo.
+
+**Actor chính:** Nhiều phòng ban phê duyệt (mỗi phòng xử lý một nhánh độc lập)
+
+**Cấu hình bước:** `IsParallel = true`, `CompletionRule = ALL_APPROVED`, `RejectionPolicy = FAIL_FAST`
+
+**Luồng xử lý:**
+1. Hồ sơ chuyển đến bước phê duyệt liên phòng
+2. Hệ thống **đồng thời** tạo trạng thái PENDING cho mỗi nhánh và gửi thông báo đến tất cả phòng ban liên quan
+3. Mỗi phòng ban xem xét hồ sơ và ra quyết định độc lập (APPROVE hoặc REJECT)
+4. Sau mỗi phản hồi, engine đánh giá lại `CompletionRule`:
+   - Nếu một phòng **từ chối** và `RejectionPolicy = FAIL_FAST` → bước thất bại ngay, hồ sơ chuyển sang nhánh từ chối
+   - Nếu tất cả phòng **phê duyệt** → bước hoàn thành, hồ sơ chuyển sang bước tiếp theo
+5. Người dùng cuối nhận thông báo kết quả cuối cùng
+
+**Điều kiện tiên quyết:**
+- Bước được cấu hình `IsParallel = true` với ít nhất 2 `ParallelApprovalBranch`
+- Tất cả phòng ban trong danh sách đã được thiết lập trong hệ thống
+
+**Kết quả mong đợi:**
+- Tất cả phòng ban nhận thông báo cùng lúc – không phải chờ tuần tự
+- Mỗi phòng ban chỉ thấy và thao tác trên nhánh của mình
+- Trạng thái từng nhánh (PENDING / APPROVED / REJECTED) hiển thị rõ ràng
+- SLA của bước được tính từ lúc bước bắt đầu (song song), không phải tổng cộng các nhánh
+
+**Notification liên quan:** Gửi đồng thời đến tất cả phòng ban liên quan (`ON_ENTER` bước song song); gửi cảnh báo khi nhánh sắp quá SLA
+
+---
+
 ## Nhóm tình huống ưu tiên triển khai
 
 Trong giai đoạn MVP, ưu tiên triển khai các tình huống theo thứ tự:
@@ -294,8 +325,9 @@ Trong giai đoạn MVP, ưu tiên triển khai các tình huống theo thứ t�
 | 5 | Trả kết quả (TH10) | Kết thúc vòng đời hồ sơ |
 | 6 | Yêu cầu bổ sung (TH2) | Tình huống phổ biến thực tế |
 | 7 | Quá hạn / Escalation (TH9) | Cơ chế kiểm soát SLA |
-| 8 | Chuyển liên phòng ban (TH5) | Cần thiết nhưng phức tạp hơn |
-| 9 | Trình phê duyệt (TH6) | Thường đơn giản hóa ở MVP |
+| 8 | Phê duyệt song song (TH11) | Tính năng đã đưa vào phạm vi; cần engine hỗ trợ `IsParallel` |
+| 9 | Chuyển liên phòng ban (TH5) | Cần thiết nhưng phức tạp hơn |
+| 10 | Trình phê duyệt (TH6) | Thường đơn giản hóa ở MVP |
 
 ---
 
@@ -317,6 +349,7 @@ Tóm tắt:
 | TH8: Từ chối | Người dùng cuối (bắt buộc có lý do) |
 | TH9: Quá hạn | Người xử lý, trưởng phòng, giám đốc (theo mức) |
 | TH10: Trả kết quả | Người dùng cuối |
+| TH11: Phê duyệt song song | Tất cả phòng ban trong `ParallelApprovalBranch` (đồng thời) |
 
 ---
 
@@ -331,3 +364,4 @@ Tóm tắt:
 - **TH6, TH7, TH8:** Cần có bước phê duyệt với đầy đủ action và transition
 - **TH9:** Cần cấu hình SLA và escalation rule cho từng bước
 - **TH10:** Cần có bước trả kết quả và action "Xác nhận đã trả"
+- **TH11:** Cần cấu hình bước với `IsParallel = true`, ít nhất 2 `ParallelApprovalBranch`, `CompletionRule`, `RejectionPolicy`; engine phải hỗ trợ `ParallelApprovalState` tại runtime

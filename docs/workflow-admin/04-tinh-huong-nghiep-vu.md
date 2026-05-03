@@ -101,6 +101,23 @@ Dưới đây là 10 tình huống làm cơ sở thiết kế workflow và notif
 **Trigger:** `ON_ASSIGNMENT_FAILURE`.  
 **Recipient:** `Role = SYSTEM_ADMIN`.
 
+## TH-11 · Bước phê duyệt song song liên phòng ban
+
+**Mô tả:** Một hồ sơ (vd: cấp phép xây dựng) cần được phê duyệt đồng thời từ nhiều phòng ban độc lập (Phòng Tài nguyên, Phòng Quy hoạch, Phòng PCCC) trước khi chuyển sang bước tiếp theo.
+
+**Cấu hình bước:** `IsParallel = true`, `CompletionRule = ALL_APPROVED`, `RejectionPolicy = FAIL_FAST`.
+
+**Kết quả mong đợi:**
+- Khi hồ sơ vào bước này, tất cả phòng ban liên quan nhận thông báo **đồng thời**.
+- Mỗi phòng ban xử lý độc lập trên nhánh của mình, không chờ nhau.
+- Khi đủ điều kiện `CompletionRule` → hồ sơ tự động chuyển sang bước tiếp theo.
+- Nếu một phòng từ chối (`FAIL_FAST`) → hồ sơ chuyển sang nhánh từ chối ngay lập tức.
+
+**Trigger:** `ON_ENTER` bước Phê duyệt liên phòng.
+**Recipient:** Tất cả `TargetDepartment` của từng `ParallelApprovalBranch`.
+
+**Trạng thái runtime mỗi nhánh:** `PENDING` → `APPROVED` hoặc `REJECTED`.
+
 ---
 
 *Xem tiếp: [05 · Vòng đời Workflow](./05-vong-doi-workflow.md)*

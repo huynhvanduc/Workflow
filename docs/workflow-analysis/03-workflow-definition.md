@@ -69,7 +69,10 @@ Ví dụ: Khi công dân A nộp hồ sơ xin cấp phép xây dựng, hệ th�
 
 **Thuộc tính chính:**
 - Tên và mô tả bước
-- Phòng ban / vai trò chịu trách nhiệm tại bước này
+- Phòng ban / vai trò chịu trách nhiệm tại bước này (bước thông thường)
+- `IsParallel`: đánh dấu bước yêu cầu phê duyệt từ nhiều bộ phận đồng thời
+- `CompletionRule` *(khi IsParallel = true)*: `ALL_APPROVED` / `MAJORITY` / `ANY_ONE`
+- `RejectionPolicy` *(khi IsParallel = true)*: `FAIL_FAST` / `WAIT_ALL`
 - SLA (thời hạn xử lý tối đa)
 - Trạng thái kết thúc của hồ sơ khi hoàn thành bước
 - Danh sách action cho phép tại bước này
@@ -77,8 +80,27 @@ Ví dụ: Khi công dân A nộp hồ sơ xin cấp phép xây dựng, hệ th�
 **Ví dụ các bước điển hình:**
 - Bước 1: Tiếp nhận hồ sơ
 - Bước 2: Thẩm định chuyên môn
-- Bước 3: Trình lãnh đạo phê duyệt
+- Bước 3: Phê duyệt liên phòng *(IsParallel = true — nhiều phòng duyệt đồng thời)*
 - Bước 4: Trả kết quả
+
+---
+
+### ParallelApprovalBranch (Nhánh phê duyệt song song)
+
+**Định nghĩa:** Một nhánh trong bước song song, đại diện cho một bộ phận / vai trò cần phê duyệt độc lập.
+
+**Thuộc tính chính:**
+- `BranchName`: tên nhánh (vd: "Phòng Tài nguyên")
+- `AssignType` + target: phòng ban / vai trò / người xử lý nhánh này
+- `SlaHours`: thời hạn riêng cho nhánh
+
+**Ví dụ:**
+```
+Bước "Phê duyệt liên phòng" (IsParallel = true, CompletionRule = ALL_APPROVED)
+  ├── Nhánh 1: Phòng Tài nguyên & Môi trường
+  ├── Nhánh 2: Phòng Quy hoạch – Kiến trúc
+  └── Nhánh 3: Phòng Cảnh sát PCCC
+```
 
 ---
 
@@ -209,9 +231,9 @@ Các thành phần tối thiểu cần có trong phiên bản đầu (MVP):
 | Notification cơ bản qua push | ✓ | Email/SMS là bổ sung |
 | SLA theo bước | ✓ | Escalation nâng cao để sau |
 | Vòng đời DRAFT → ACTIVE | ✓ | Bao gồm giai đoạn TESTING |
+| **Phê duyệt song song (parallel approval)** | **✓** | Bước có `IsParallel = true`, `CompletionRule`, `RejectionPolicy`; xem mô tả chi tiết bên dưới |
 | Conditional transition | Không | Có thể thêm ở phiên bản sau |
 | Assignment theo tải công việc | Không | Thêm khi có dữ liệu vận hành |
-| Workflow song song (parallel steps) | Không | Phức tạp, để phiên bản sau |
 
 ---
 
@@ -219,7 +241,7 @@ Các thành phần tối thiểu cần có trong phiên bản đầu (MVP):
 
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
-| 1 | Workflow có hỗ trợ bước song song (nhiều phòng ban xử lý đồng thời một hồ sơ) không? | Cao |
+| ~~1~~ | ~~Workflow có hỗ trợ bước song song (nhiều phòng ban xử lý đồng thời một hồ sơ) không?~~ | ✅ **Đã chốt:** Có hỗ trợ. Xem `IsParallel`, `CompletionRule`, `RejectionPolicy`, `ParallelApprovalBranch`. |
 | 2 | Transition có điều kiện dựa vào dữ liệu hồ sơ (ví dụ: chỉ phê duyệt nếu giá trị > X) có cần không? | Cao |
 | 3 | SLA tính theo giờ làm việc hay giờ dương lịch? Có tính ngày lễ không? | Trung bình |
 | 4 | Khi chuyên viên vắng mặt, hệ thống tự động chuyển phân công hay chờ admin can thiệp? | Trung bình |

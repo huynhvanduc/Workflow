@@ -78,6 +78,7 @@ Hệ thống cần tự xây dựng một **Workflow Runtime Engine** nhỏ gọ
 | `StepResolver` | Xác định bước hiện tại của một CaseInstance |
 | `TransitionEvaluator` | Đánh giá điều kiện chuyển trạng thái (transition condition) |
 | `AssignmentResolver` | Xác định người/phòng ban được phân công tại mỗi bước |
+| `ParallelApprovalEvaluator` | Khởi tạo nhánh song song, theo dõi trạng thái từng nhánh, đánh giá `CompletionRule` và `RejectionPolicy` sau mỗi phản hồi |
 | `SLAMonitor` | Theo dõi thời hạn và kích hoạt cảnh báo / leo thang |
 | `NotificationDispatcher` | Gửi thông báo đúng đối tượng theo quy tắc đã cấu hình |
 
@@ -129,15 +130,17 @@ Hệ thống cần tự xây dựng một **Workflow Runtime Engine** nhỏ gọ
 | Nhóm | Bảng | Mô tả |
 |---|---|---|
 | **Workflow Config** | `WorkflowDefinitions` | Định nghĩa workflow và phiên bản |
-| | `WorkflowSteps` | Các bước trong workflow |
+| | `WorkflowSteps` | Các bước trong workflow (bao gồm cả bước song song) |
+| | `ParallelApprovalBranches` | Các nhánh phê duyệt của bước song song (`IsParallel = true`) |
 | | `WorkflowActions` | Hành động có thể thực hiện tại mỗi bước |
 | | `WorkflowTransitions` | Điều kiện chuyển bước |
-| | `AssignmentRules` | Quy tắc phân công tự động |
+| | `AssignmentRules` | Quy tắc phân công tự động (bước thông thường) |
 | | `NotificationRules` | Quy tắc gửi thông báo |
 | | `SlaConfigs` | Cấu hình SLA và leo thang |
 | **Case Runtime** | `CaseInstances` | Hồ sơ đang xử lý |
 | | `CaseStepStates` | Trạng thái từng bước của hồ sơ |
 | | `CaseAssignments` | Phân công cán bộ xử lý |
+| | `ParallelApprovalStates` | Trạng thái từng nhánh của bước song song (PENDING / APPROVED / REJECTED) |
 | **Audit** | `CaseAuditLogs` | Nhật ký xử lý hồ sơ |
 | | `WorkflowConfigAuditLogs` | Nhật ký cấu hình workflow |
 | **Org** | `Departments` | Phòng ban / bộ phận |

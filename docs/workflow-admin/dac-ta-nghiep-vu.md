@@ -83,8 +83,52 @@ Mỗi workflow có nhiều bước nối tiếp nhau.
 | `Name` | Tên bước (vd: "Tiếp nhận", "Thẩm định", "Phê duyệt") |
 | `StepType` | Loại bước: `Start`, `Process`, `Approval`, `End` |
 | `Order` | Thứ tự trong luồng |
-| `IsParallel` | Cho phép xử lý song song không |
+| `IsParallel` | `true` = bước phê duyệt song song; `false` = bước thông thường |
+| `CompletionRule` | *(chỉ dùng khi `IsParallel = true`)* `ALL_APPROVED` / `MAJORITY` / `ANY_ONE` |
+| `RejectionPolicy` | *(chỉ dùng khi `IsParallel = true`)* `FAIL_FAST` / `WAIT_ALL` |
 | `SlaConfig` | Cấu hình SLA gắn với bước này |
+
+#### Bước song song (IsParallel = true)
+
+Khi một bước được đánh dấu `IsParallel = true`, thay vì giao cho một người/phòng ban duy nhất, bước đó sẽ tạo ra nhiều **nhánh phê duyệt độc lập** chạy đồng thời:
+
+| CompletionRule | Ý nghĩa |
+|---|---|
+| `ALL_APPROVED` | Tất cả nhánh phải phê duyệt → bước mới hoàn thành |
+| `MAJORITY` | Hơn một nửa nhánh phê duyệt là đủ |
+| `ANY_ONE` | Chỉ cần một nhánh phê duyệt là bước hoàn thành |
+
+| RejectionPolicy | Ý nghĩa |
+|---|---|
+| `FAIL_FAST` | Ngay khi một nhánh từ chối → toàn bộ bước thất bại ngay lập tức |
+| `WAIT_ALL` | Chờ tất cả nhánh phản hồi rồi mới đánh giá kết quả |
+
+---
+
+### 3.2.1 ParallelApprovalBranch – Nhánh phê duyệt song song
+
+*(Chỉ tồn tại khi bước có `IsParallel = true`)*
+
+| Thuộc tính | Mô tả |
+|---|---|
+| `Id` | Định danh |
+| `StepId` | Thuộc bước nào |
+| `BranchName` | Tên nhánh (vd: "Phòng Tài nguyên", "Phòng Quy hoạch", "Phòng PCCC") |
+| `Order` | Thứ tự hiển thị |
+| `AssignType` | `DEPARTMENT` / `ROLE` / `USER` |
+| `TargetDepartmentCode` | Phòng ban đích (nếu `AssignType = DEPARTMENT`) |
+| `TargetRoleCode` | Vai trò đích (nếu `AssignType = ROLE`) |
+| `TargetUserId` | User cụ thể (nếu `AssignType = USER`) |
+| `SlaHours` | SLA riêng cho nhánh này |
+
+Ví dụ cấu hình:
+
+```
+Bước "Phê duyệt liên phòng" (IsParallel = true, CompletionRule = ALL_APPROVED, RejectionPolicy = FAIL_FAST)
+  ├── Nhánh 1: Phòng Tài nguyên & Môi trường  (SlaHours: 48)
+  ├── Nhánh 2: Phòng Quy hoạch – Kiến trúc    (SlaHours: 48)
+  └── Nhánh 3: Phòng Cảnh sát PCCC            (SlaHours: 24)
+```
 
 ---
 
@@ -139,6 +183,8 @@ FromStep: Thẩm định  →  Action: REJECT   →  ToStep: Trả kết quả
 ---
 
 ### 3.5 AssignmentRule – Quy tắc phân công
+
+> **Lưu ý:** AssignmentRule chỉ áp dụng cho bước **thông thường** (`IsParallel = false`). Với bước song song (`IsParallel = true`), quy tắc phân công được cấu hình riêng cho từng `ParallelApprovalBranch`.
 
 Xác định ai/bộ phận nào chịu trách nhiệm xử lý tại mỗi bước.
 
@@ -378,6 +424,23 @@ Dưới đây là 10 tình huống làm cơ sở thiết kế workflow và notif
 
 ---
 
+### TH-11: Phê duyệt song song liên phòng ban
+
+**Mô tả:** Hồ sơ (vd: cấp phép xây dựng) cần được phê duyệt đồng thời từ nhiều phòng ban độc lập trước khi chuyển bước tiếp theo.
+
+**Cấu hình bước:** `IsParallel = true`, `CompletionRule = ALL_APPROVED`, `RejectionPolicy = FAIL_FAST`.
+
+**Kết quả mong đợi:**
+- Khi hồ sơ vào bước này, tất cả phòng ban liên quan nhận thông báo **đồng thời**.
+- Mỗi phòng ban xử lý độc lập trên nhánh của mình, không chờ nhau.
+- Khi đủ điều kiện `CompletionRule` → hồ sơ tự động chuyển sang bước tiếp theo.
+- Nếu một phòng từ chối (`FAIL_FAST`) → hồ sơ chuyển nhánh từ chối ngay lập tức.
+
+**Trigger:** `ON_ENTER` bước Phê duyệt liên phòng.  
+**Recipient:** Tất cả `TargetDepartment` của từng `ParallelApprovalBranch`.
+
+---
+
 ## 6. Vòng đời quản trị Workflow
 
 ### 6.1 Sơ đồ trạng thái
@@ -539,7 +602,8 @@ WorkflowDefinition
     │
     ├── Step (1..n)
     │     ├── Action (1..n)
-    │     ├── AssignmentRule (1..1)
+    │     ├── AssignmentRule (1..1)            ← chỉ dùng khi IsParallel = false
+    │     ├── ParallelApprovalBranch (0..n)    ← chỉ dùng khi IsParallel = true
     │     ├── NotificationRule (0..n)
     │     └── SlaConfig (0..1)
     │
