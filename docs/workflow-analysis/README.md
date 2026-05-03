@@ -25,6 +25,8 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 | 09 | [09-governance-and-activation.md](./09-governance-and-activation.md) | Nguyên tắc quản trị và điều kiện kích hoạt |
 | 10 | [10-end-user-checklist.md](./10-end-user-checklist.md) | Checklist cho người dùng cuối |
 | 11 | [11-audit-log.md](./11-audit-log.md) | Audit Log – Nhật ký thao tác (nhân viên & admin) |
+| 12 | [12-technology-analysis.md](./12-technology-analysis.md) | Phân tích công nghệ – stack, kiến trúc, hạ tầng |
+| 13 | [13-challenges-and-risks.md](./13-challenges-and-risks.md) | Dự đoán thách thức và issue có thể xảy ra |
 
 ## Gợi ý thứ tự đọc
 
@@ -37,6 +39,8 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 7. [08-issue-feedback-tracking.md](./08-issue-feedback-tracking.md) – Ghi nhận và xử lý phản ánh lỗi
 8. [09-governance-and-activation.md](./09-governance-and-activation.md) – Điều kiện và nguyên tắc công bố chính thức
 9. [10-end-user-checklist.md](./10-end-user-checklist.md) – Checklist từ góc nhìn người dùng cuối
+10. [12-technology-analysis.md](./12-technology-analysis.md) – Phân tích công nghệ và stack kỹ thuật
+11. [13-challenges-and-risks.md](./13-challenges-and-risks.md) – Dự đoán thách thức và issue có thể xảy ra
 
 ## Tài liệu liên quan
 
