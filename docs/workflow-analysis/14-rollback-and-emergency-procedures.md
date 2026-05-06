@@ -219,10 +219,10 @@ Mọi thao tác rollback và hotfix phải được ghi vào audit log với cá
 
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
-| 1 | Rollback có yêu cầu phê duyệt từ cấp trên trước khi thực hiện không? | Cao |
-| 2 | Hồ sơ đang dở theo phiên bản lỗi: hệ thống tự xử lý hay bắt buộc admin can thiệp thủ công từng cái? | Cao |
+| ~~1~~ | ~~Rollback có yêu cầu phê duyệt từ cấp trên trước khi thực hiện không?~~ | ✅ **Đã chốt:** Có |
+| ~~2~~ | ~~Hồ sơ đang dở theo phiên bản lỗi: hệ thống tự xử lý hay bắt buộc admin can thiệp thủ công từng cái?~~ | ✅ **Đã chốt:** Hệ thống tự xử lý |
 | 3 | Có giới hạn số lần rollback trong một khoảng thời gian nhất định không (để tránh lạm dụng)? | Trung bình |
 | 4 | Thời gian giữ phiên bản INACTIVE: 365 ngày hay theo quy định lưu trữ hồ sơ hành chính (thường là 5–10 năm)? | Trung bình |
 | 5 | Hotfix có cần một người xác nhận thứ hai không, hay admin đơn lẻ được phép thực hiện? | Cao |
-| 6 | Khi rollback, hồ sơ mới nộp trong khoảng thời gian phiên bản lỗi đang ACTIVE được xử lý theo phiên bản nào? | Cao |
+| ~~6~~ | ~~Khi rollback, hồ sơ mới nộp trong khoảng thời gian phiên bản lỗi đang ACTIVE được xử lý theo phiên bản nào?~~ | ✅ **Đã chốt:** Phiên bản ổn định gần nhất |
 | 7 | Có cần cơ chế "simulation" cho phép admin xem trước tác động của rollback lên các hồ sơ đang dở trước khi xác nhận không? | Trung bình |

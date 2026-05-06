@@ -391,7 +391,7 @@ TỔNG KẾT: 1 bước thêm · 1 bước xóa · 1 bước sửa · 2 transiti
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
 | 1 | Thời gian lưu trữ log tối thiểu theo quy định pháp lý là bao lâu? | Cao |
-| 2 | Lý do từ chối/trả lại có hiển thị cho người dân không, hay chỉ nội bộ? | Cao |
+| ~~2~~ | ~~Lý do từ chối/trả lại có hiển thị cho người dân không, hay chỉ nội bộ?~~ | ✅ **Đã chốt:** Có, hiển thị cho người dân |
 | 3 | Có cần ghi log truy cập (ai đã xem hồ sơ, kể cả chỉ xem mà không hành động)? | Trung bình |
 | 4 | Meta-audit (ghi log việc xem log) có bắt buộc không? | Trung bình |
 | 5 | Tên cán bộ trong log hiển thị cho người dân: full name hay chỉ tên phòng ban? | Trung bình |

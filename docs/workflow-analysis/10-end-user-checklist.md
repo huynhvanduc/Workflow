@@ -179,8 +179,8 @@ Các tiêu chí này được dùng trong quá trình UAT để xác nhận hệ
 
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
-| 1 | Người dùng có cần xác thực định danh điện tử (VneID, VNPT eKYC...) khi nộp hồ sơ không? | Cao |
-| 2 | Người dùng có thể lưu nháp hồ sơ và tiếp tục điền vào lần sau không? | Cao |
+| ~~1~~ | ~~Người dùng có cần xác thực định danh điện tử (VneID, VNPT eKYC...) khi nộp hồ sơ không?~~ | ✅ **Đã chốt:** Optional – hiện tại chưa triển khai |
+| ~~2~~ | ~~Người dùng có thể lưu nháp hồ sơ và tiếp tục điền vào lần sau không?~~ | ✅ **Đã chốt:** Có |
 | 3 | Trường hợp người dùng muốn rút hồ sơ đã nộp: có hỗ trợ không? Điều kiện rút là gì? | Trung bình |
 | 4 | Người dùng có được thông báo nếu hồ sơ bị chậm hơn dự kiến không? | Trung bình |
 | 5 | Có cần hỗ trợ đa ngôn ngữ (tiếng Anh, tiếng dân tộc thiểu số) không? | Thấp |

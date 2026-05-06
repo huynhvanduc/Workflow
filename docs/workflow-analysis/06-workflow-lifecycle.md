@@ -169,6 +169,6 @@ DRAFT → READY_FOR_TEST → TESTING → READY_FOR_PRODUCTION → ACTIVE → INA
 | # | Ghi chú / Câu hỏi | Trạng thái |
 |---|-------------------|------------|
 | 1 | Thời gian test tối thiểu bắt buộc: **15 ngày** | ✅ Đã chốt |
-| 2 | Có cho phép admin rút ngắn thời gian test trong trường hợp khẩn không? | Cần chốt |
+| 2 | Có cho phép admin rút ngắn thời gian test trong trường hợp khẩn không? | ✅ Đã chốt: Có |
 | 3 | Khi DEACTIVATE khẩn cấp, hồ sơ đang xử lý dở **chuyển vào lưu trữ tồn đọng** | ✅ Đã chốt |
-| 4 | Cần xác nhận: hệ thống có tự động chuyển TESTING → READY_FOR_PRODUCTION sau khi hết thời gian, hay admin phải thao tác thủ công? | Cần chốt |
+| 4 | Cần xác nhận: hệ thống có tự động chuyển TESTING → READY_FOR_PRODUCTION sau khi hết thời gian, hay admin phải thao tác thủ công? | ✅ Đã chốt: Không tự động; hệ thống gửi thông báo để admin thao tác thủ công |
