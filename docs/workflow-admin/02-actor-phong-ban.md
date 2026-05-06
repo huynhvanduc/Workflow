@@ -11,7 +11,7 @@
 | Đối tượng | Vai trò chính | Được sử dụng khi Workflow ở trạng thái |
 |---|---|---|
 | **Admin** | Cấu hình workflow, quản lý phòng ban & SLA, xem báo cáo | `DRAFT`, `READY_FOR_TEST`, `TESTING`, `READY_FOR_PRODUCTION` |
-| **Tester** | Kiểm thử workflow, ghi nhận lỗi, xác nhận fix | `TESTING` |
+| **Tester** | Kiểm thử workflow, ghi nhận lỗi, xác nhận fix *(phải là cán bộ nội bộ)* | `TESTING` |
 | **Cán bộ tiếp nhận** | Tiếp nhận hồ sơ, kiểm tra ban đầu, chuyển bộ phận | `ACTIVE` |
 | **Chuyên viên xử lý** | Thẩm định, xử lý nghiệp vụ, trình duyệt | `ACTIVE` |
 | **Người phê duyệt** | Duyệt / từ chối / ký duyệt hồ sơ | `ACTIVE` |

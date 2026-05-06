@@ -66,10 +66,11 @@ Nhóm tester nên bao gồm đại diện từ tất cả các vai trò trong wo
 
 ### Điều kiện để được tham gia test
 
-- Được admin chỉ định và thêm vào danh sách nhóm test của workflow
-- Đã được hướng dẫn về mục tiêu test và các tình huống cần kiểm tra
-- Hiểu rõ: hồ sơ tạo trong giai đoạn test là **hồ sơ giả** – không phải hồ sơ vận hành thật
-- Cam kết ghi nhận phản ánh lỗi qua công cụ issue tracking của hệ thống (không báo cáo qua email/chat riêng)
+- **Phải là cán bộ nội bộ của tổ chức** – không sử dụng nhân sự bên ngoài làm tester.
+- Được admin chỉ định và thêm vào danh sách nhóm test của workflow.
+- Đã được hướng dẫn về mục tiêu test và các tình huống cần kiểm tra.
+- Hiểu rõ: hồ sơ tạo trong giai đoạn test là **hồ sơ giả** – không phải hồ sơ vận hành thật.
+- Cam kết ghi nhận phản ánh lỗi qua công cụ issue tracking của hệ thống (không báo cáo qua email/chat riêng).
 
 ---
 
@@ -132,6 +133,7 @@ Trong giai đoạn TESTING, nhóm tester phải thực hiện và xác nhận í
 | Khía cạnh | Tester | User thật (Người dùng cuối) |
 |-----------|--------|---------------------------|
 | Được chỉ định bởi | Admin (thêm vào danh sách nhóm test) | Không cần chỉ định |
+| Loại nhân sự | **Cán bộ nội bộ** của tổ chức | Người dân / đối tượng sử dụng dịch vụ |
 | Loại tài khoản | Tài khoản test hoặc tài khoản có flag "test user" | Tài khoản thường |
 | Workflow được dùng | Workflow ở trạng thái TESTING | Chỉ workflow ở trạng thái ACTIVE |
 | Hồ sơ tạo ra | Hồ sơ test (không phải hồ sơ vận hành) | Hồ sơ thật |

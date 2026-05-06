@@ -61,7 +61,7 @@ Mọi thay đổi trạng thái của workflow (ai thay đổi, lúc nào, lý d
 
 | Hành động | Điều kiện | Kết quả |
 |---|---|---|
-| `DEACTIVATE` | Có bản mới đã được activate thay thế, hoặc quyết định tắt dịch vụ | Chuyển sang `INACTIVE`; hồ sơ đang xử lý theo bản cũ vẫn tiếp tục |
+| `DEACTIVATE` | Có bản mới đã được activate thay thế, hoặc quyết định tắt dịch vụ | Chuyển sang `INACTIVE`; hồ sơ đang xử lý theo bản cũ vẫn tiếp tục. **Admin thực hiện không cần approval flow.** |
 | `ARCHIVE` | Workflow không còn được dùng vĩnh viễn | Chuyển sang `ARCHIVED`; chỉ admin xem được lịch sử |
 | `REACTIVATE` | Admin quyết định kích hoạt lại bản cũ (trường hợp khẩn cấp) | Chuyển từ `INACTIVE` → `ACTIVE` |
 
