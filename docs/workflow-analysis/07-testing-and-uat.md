@@ -66,10 +66,11 @@ Nhóm tester nên bao gồm đại diện từ tất cả các vai trò trong wo
 
 ### Điều kiện để được tham gia test
 
-- Được admin chỉ định và thêm vào danh sách nhóm test của workflow
-- Đã được hướng dẫn về mục tiêu test và các tình huống cần kiểm tra
-- Hiểu rõ: hồ sơ tạo trong giai đoạn test là **hồ sơ giả** – không phải hồ sơ vận hành thật
-- Cam kết ghi nhận phản ánh lỗi qua công cụ issue tracking của hệ thống (không báo cáo qua email/chat riêng)
+- **Phải là cán bộ nội bộ của tổ chức** – không sử dụng nhân sự bên ngoài làm tester.
+- Được admin chỉ định và thêm vào danh sách nhóm test của workflow.
+- Đã được hướng dẫn về mục tiêu test và các tình huống cần kiểm tra.
+- Hiểu rõ: hồ sơ tạo trong giai đoạn test là **hồ sơ giả** – không phải hồ sơ vận hành thật.
+- Cam kết ghi nhận phản ánh lỗi qua công cụ issue tracking của hệ thống (không báo cáo qua email/chat riêng).
 
 ---
 
@@ -132,6 +133,7 @@ Trong giai đoạn TESTING, nhóm tester phải thực hiện và xác nhận í
 | Khía cạnh | Tester | User thật (Người dùng cuối) |
 |-----------|--------|---------------------------|
 | Được chỉ định bởi | Admin (thêm vào danh sách nhóm test) | Không cần chỉ định |
+| Loại nhân sự | **Cán bộ nội bộ** của tổ chức | Người dân / đối tượng sử dụng dịch vụ |
 | Loại tài khoản | Tài khoản test hoặc tài khoản có flag "test user" | Tài khoản thường |
 | Workflow được dùng | Workflow ở trạng thái TESTING | Chỉ workflow ở trạng thái ACTIVE |
 | Hồ sơ tạo ra | Hồ sơ test (không phải hồ sơ vận hành) | Hồ sơ thật |
@@ -162,10 +164,10 @@ Trong giai đoạn TESTING, nhóm tester phải thực hiện và xác nhận í
 
 ## Câu hỏi cần chốt thêm
 
-| # | Câu hỏi | Mức độ ưu tiên |
-|---|---------|----------------|
-| 1 | Thời gian test tối thiểu mặc định là bao nhiêu? Admin có được cấu hình khác không? | Cao |
-| 2 | Nếu admin chỉnh sửa cấu hình trong lúc TESTING, có cần reset thời gian test không? | Cao |
-| 3 | Tester có cần checklist rõ ràng bắt buộc, hay tự do test theo hiểu biết? | Trung bình |
-| 4 | Có cần lưu evidence kiểm thử (screenshot, file log) không, hay chỉ cần xác nhận trong hệ thống? | Trung bình |
-| 5 | Nếu tester phát hiện lỗi nghiêm trọng sau khi đã ký xác nhận, có cơ chế thu hồi xác nhận không? | Trung bình |
+| # | Câu hỏi | Mức độ ưu tiên | Câu trả lời |
+|---|---------|----------------|-------------|
+| 1 | Thời gian test tối thiểu mặc định là bao nhiêu? Admin có được cấu hình khác không? | Cao | **15 ngày** (admin có thể cấu hình) |
+| 2 | Nếu admin chỉnh sửa cấu hình trong lúc TESTING, có cần reset thời gian test không? | Cao |  |
+| 3 | Tester có cần checklist rõ ràng bắt buộc, hay tự do test theo hiểu biết? | Trung bình |  |
+| 4 | Có cần lưu evidence kiểm thử (screenshot, file log) không, hay chỉ cần xác nhận trong hệ thống? | Trung bình |  |
+| 5 | Nếu tester phát hiện lỗi nghiêm trọng sau khi đã ký xác nhận, có cơ chế thu hồi xác nhận không? | Trung bình |  |

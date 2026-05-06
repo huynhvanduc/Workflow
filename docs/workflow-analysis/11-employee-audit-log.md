@@ -222,7 +222,7 @@ Hệ thống nên tự động phát cảnh báo khi phát hiện các pattern b
 | # | Câu hỏi | Mức độ ưu tiên | Người phụ trách |
 |---|---------|----------------|-----------------|
 | 1 | Thời hạn lưu trữ chính xác theo quy định pháp lý hiện hành là bao nhiêu năm? | Cao | Pháp chế |
-| 2 | Có yêu cầu mã hóa (encryption) dữ liệu audit log khi lưu trữ không? | Cao | Kỹ thuật + Bảo mật |
+| ~~2~~ | ~~Có yêu cầu mã hóa (encryption) dữ liệu audit log khi lưu trữ không?~~ | ✅ **Đã chốt:** Có | Kỹ thuật + Bảo mật |
 | 3 | Có cần cơ chế export log định kỳ sang hệ thống lưu trữ bên ngoài không? | Trung bình | Kỹ thuật |
 | 4 | Có bật log `VIEW_RECORD` mặc định không, hay chỉ bật khi điều tra? | Trung bình | Nghiệp vụ |
 | 5 | Giao diện tra cứu audit log dành cho DEPT_MANAGER có cần tích hợp vào dashboard không? | Trung bình | UX/UI |

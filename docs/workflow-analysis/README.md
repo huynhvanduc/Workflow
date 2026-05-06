@@ -28,6 +28,7 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 | 11b | [11-employee-audit-log.md](./11-employee-audit-log.md) | Audit log cho nhân viên xử lý hồ sơ |
 | 12 | [12-technology-analysis.md](./12-technology-analysis.md) | Phân tích công nghệ – stack, kiến trúc, hạ tầng |
 | 13 | [13-challenges-and-risks.md](./13-challenges-and-risks.md) | Dự đoán thách thức và issue có thể xảy ra |
+| 14 | [14-rollback-and-emergency-procedures.md](./14-rollback-and-emergency-procedures.md) | Rollback phiên bản và xử lý khẩn cấp |
 
 ## Gợi ý thứ tự đọc
 
@@ -42,6 +43,7 @@ Bộ tài liệu này mô tả bài toán nghiệp vụ cho chức năng cấu h
 9. [10-end-user-checklist.md](./10-end-user-checklist.md) – Checklist từ góc nhìn người dùng cuối
 10. [12-technology-analysis.md](./12-technology-analysis.md) – Phân tích công nghệ và stack kỹ thuật
 11. [13-challenges-and-risks.md](./13-challenges-and-risks.md) – Dự đoán thách thức và issue có thể xảy ra
+12. [14-rollback-and-emergency-procedures.md](./14-rollback-and-emergency-procedures.md) – Rollback phiên bản và xử lý khẩn cấp
 
 ## Tài liệu liên quan
 

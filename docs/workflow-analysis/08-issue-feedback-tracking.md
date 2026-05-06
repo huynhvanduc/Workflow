@@ -257,7 +257,7 @@ Giao diện quản lý issue của admin nên hiển thị:
 
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
-| 1 | Issue tracking có phải là module trong hệ thống hay dùng công cụ ngoài (Jira, GitHub Issues...)? | Cao |
+| ~~1~~ | ~~Issue tracking có phải là module trong hệ thống hay dùng công cụ ngoài (Jira, GitHub Issues...)?~~ | ✅ **Đã chốt:** Là module trong hệ thống |
 | 2 | Ai có quyền REJECT một phản ánh? Chỉ admin hay cả kỹ thuật? | Trung bình |
 | 3 | Có cần phân loại mức độ ưu tiên (priority) tách biệt với mức độ nghiêm trọng (severity) không? | Trung bình |
 | 4 | Tester có thể tạo issue cho nhiều workflow cùng lúc hay mỗi session chỉ test một workflow? | Thấp |

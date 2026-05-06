@@ -263,7 +263,7 @@ Luồng ngang:
 | Vai trò | Quyền |
 |---------|-------|
 | Admin / SYSTEM_ADMIN | Xem toàn bộ báo cáo vận hành: tồn đọng, quá hạn, lỗi luồng |
-| MONITOR | Xem báo cáo, không thay đổi cấu hình |
+| MONITOR | Xem báo cáo **theo phòng ban** (không xem tên cán bộ cụ thể), không thay đổi cấu hình |
 | Lãnh đạo | Xem báo cáo thuộc phạm vi phê duyệt của mình |
 | Trưởng phòng | Xem tình trạng hồ sơ trong phòng ban |
 | Cán bộ | Không có quyền xem báo cáo tổng hợp |
@@ -288,20 +288,26 @@ Luồng ngang:
 
 2. **Người dùng cuối chỉ thấy ACTIVE:** Workflow ở trạng thái DRAFT, TESTING, READY_FOR_TEST, READY_FOR_PRODUCTION hoàn toàn ẩn với người dùng cuối (người dân và cán bộ nghiệp vụ thông thường).
 
-3. **Tester được chỉ định:** Trong giai đoạn TESTING, chỉ nhóm tester được admin chỉ định mới có quyền tương tác với workflow. Người dùng cuối thực tế không được tiếp cận.
+3. **Tester được chỉ định và phải là cán bộ nội bộ:** Trong giai đoạn TESTING, chỉ nhóm tester được admin chỉ định mới có quyền tương tác với workflow. Tester phải là cán bộ nội bộ của tổ chức – không sử dụng nhân sự bên ngoài. Người dùng cuối thực tế không được tiếp cận.
 
 4. **Phạm vi xem theo vai trò:** Dữ liệu hồ sơ, nhật ký và báo cáo được hiển thị theo phạm vi vai trò – không ai xem được dữ liệu ngoài phạm vi được phép.
 
 5. **Audit log bất biến:** Chỉ service account ứng dụng được ghi log; không có user nào (kể cả Admin) được sửa hoặc xóa bản ghi audit log.
 
+6. **Phân quyền theo đơn vị hành chính:** Hệ thống hỗ trợ phân quyền theo đơn vị hành chính (tỉnh/huyện/xã). Người dùng chỉ có thể xem và xử lý hồ sơ thuộc phạm vi đơn vị hành chính được phân công.
+
+7. **DEACTIVATE khẩn cấp:** Admin có quyền DEACTIVATE workflow đang ACTIVE ngay lập tức mà không cần approval flow. Thao tác này được ghi nhận đầy đủ trong audit log.
+
+8. **Người dùng có thể đảm nhiệm nhiều vai trò:** Một người dùng được phép được gán đồng thời nhiều vai trò (vd: vừa là Chuyên viên vừa là Trưởng phòng). Quyền hạn hiệu lực là hợp nhất của tất cả các vai trò được gán.
+
 ---
 
 ## Câu hỏi cần chốt thêm
 
-| # | Câu hỏi | Mức độ ưu tiên |
-|---|---------|----------------|
-| 1 | Có cần phân quyền theo đơn vị hành chính (tỉnh/huyện/xã) không? | Trung bình |
-| 2 | Một người dùng có thể đảm nhiệm nhiều vai trò cùng lúc không (vd: vừa là Chuyên viên vừa là Trưởng phòng)? | Cao |
-| 3 | Ai có quyền DEACTIVATE khẩn cấp workflow đang ACTIVE? Cần approval flow không? | Cao |
-| 4 | Tester có phải là cán bộ nội bộ hay có thể là bên ngoài? | Trung bình |
-| 5 | MONITOR có được xem tên cán bộ cụ thể trong báo cáo, hay chỉ xem theo phòng ban? | Thấp |
+| # | Câu hỏi | Mức độ ưu tiên | Câu trả lời |
+|---|---------|----------------|-------------|
+| 1 | Có cần phân quyền theo đơn vị hành chính (tỉnh/huyện/xã) không? | Trung bình | **Có** |
+| 2 | Một người dùng có thể đảm nhiệm nhiều vai trò cùng lúc không (vd: vừa là Chuyên viên vừa là Trưởng phòng)? | Cao | **Có** |
+| 3 | Ai có quyền DEACTIVATE khẩn cấp workflow đang ACTIVE? Cần approval flow không? | Cao | **Admin – không cần approval flow** |
+| 4 | Tester có phải là cán bộ nội bộ hay có thể là bên ngoài? | Trung bình | **Cán bộ nội bộ** |
+| 5 | MONITOR có được xem tên cán bộ cụ thể trong báo cáo, hay chỉ xem theo phòng ban? | Thấp | **Xem theo phòng ban** |
