@@ -298,6 +298,8 @@ Luồng ngang:
 
 7. **DEACTIVATE khẩn cấp:** Admin có quyền DEACTIVATE workflow đang ACTIVE ngay lập tức mà không cần approval flow. Thao tác này được ghi nhận đầy đủ trong audit log.
 
+8. **Người dùng có thể đảm nhiệm nhiều vai trò:** Một người dùng được phép được gán đồng thời nhiều vai trò (vd: vừa là Chuyên viên vừa là Trưởng phòng). Quyền hạn hiệu lực là hợp nhất của tất cả các vai trò được gán.
+
 ---
 
 ## Câu hỏi cần chốt thêm
@@ -305,7 +307,7 @@ Luồng ngang:
 | # | Câu hỏi | Mức độ ưu tiên | Câu trả lời |
 |---|---------|----------------|-------------|
 | 1 | Có cần phân quyền theo đơn vị hành chính (tỉnh/huyện/xã) không? | Trung bình | **Có** |
-| 2 | Một người dùng có thể đảm nhiệm nhiều vai trò cùng lúc không (vd: vừa là Chuyên viên vừa là Trưởng phòng)? | Cao | Đang chờ xác nhận |
+| 2 | Một người dùng có thể đảm nhiệm nhiều vai trò cùng lúc không (vd: vừa là Chuyên viên vừa là Trưởng phòng)? | Cao | **Có** |
 | 3 | Ai có quyền DEACTIVATE khẩn cấp workflow đang ACTIVE? Cần approval flow không? | Cao | **Admin – không cần approval flow** |
 | 4 | Tester có phải là cán bộ nội bộ hay có thể là bên ngoài? | Trung bình | **Cán bộ nội bộ** |
 | 5 | MONITOR có được xem tên cán bộ cụ thể trong báo cáo, hay chỉ xem theo phòng ban? | Thấp | **Xem theo phòng ban** |
