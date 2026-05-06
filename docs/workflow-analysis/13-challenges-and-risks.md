@@ -255,9 +255,9 @@ Tài liệu này dự đoán và phân loại các thách thức kỹ thuật, n
 - Dữ liệu không nhất quán nếu một số action đã được thực hiện một nửa
 
 **Biện pháp phòng ngừa:**
-- Khi DEACTIVATE, hồ sơ đang dở chuyển sang trạng thái `SUSPENDED` (không hủy)
-- Cung cấp giao diện cho admin xem danh sách hồ sơ bị ảnh hưởng và xử lý thủ công từng cái
-- Thông báo tự động đến người dân khi hồ sơ bị tạm đình
+- Khi DEACTIVATE, hồ sơ đang dở được chuyển vào **lưu trữ tồn đọng** (không hủy)
+- Admin có thể xem danh sách hồ sơ tồn đọng và xử lý theo từng trường hợp
+- Thông báo tự động đến người dân khi hồ sơ bị chuyển tồn đọng
 - Không bao giờ tự động xóa hoặc hủy hồ sơ khi deactivate
 
 ---
@@ -280,7 +280,7 @@ Tài liệu này dự đoán và phân loại các thách thức kỹ thuật, n
 
 ### V-04: Tăng trưởng dữ liệu Audit Log
 
-**Mô tả:** Với yêu cầu lưu trữ 10 năm cho Case Audit Log và 5 năm cho Config Audit Log, khối lượng dữ liệu sẽ rất lớn.
+**Mô tả:** Audit log được lưu trong hot storage 1 tuần rồi chuyển vào lưu trữ tồn đọng. Khối lượng dữ liệu tích lũy trong tồn đọng sẽ rất lớn theo thời gian.
 
 **Rủi ro:**
 - Query audit log chậm sau nhiều tháng vận hành

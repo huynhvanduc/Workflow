@@ -242,7 +242,7 @@ Các thành phần tối thiểu cần có trong phiên bản đầu (MVP):
 | # | Câu hỏi | Mức độ ưu tiên |
 |---|---------|----------------|
 | ~~1~~ | ~~Workflow có hỗ trợ bước song song (nhiều phòng ban xử lý đồng thời một hồ sơ) không?~~ | ✅ **Đã chốt:** Có hỗ trợ. Xem `IsParallel`, `CompletionRule`, `RejectionPolicy`, `ParallelApprovalBranch`. |
-| 2 | Transition có điều kiện dựa vào dữ liệu hồ sơ (ví dụ: chỉ phê duyệt nếu giá trị > X) có cần không? | Cao |
-| 3 | SLA tính theo giờ làm việc hay giờ dương lịch? Có tính ngày lễ không? | Trung bình |
+| ~~2~~ | ~~Transition có điều kiện dựa vào dữ liệu hồ sơ (ví dụ: chỉ phê duyệt nếu giá trị > X) có cần không?~~ | ✅ **Đã chốt:** Có |
+| ~~3~~ | ~~SLA tính theo giờ làm việc hay giờ dương lịch? Có tính ngày lễ không?~~ | ✅ **Đã chốt:** Tính theo giờ làm việc; không tính ngày lễ Việt Nam |
 | 4 | Khi chuyên viên vắng mặt, hệ thống tự động chuyển phân công hay chờ admin can thiệp? | Trung bình |
 | 5 | Một workflow có thể áp dụng cho nhiều loại hồ sơ khác nhau không, hay mỗi loại hồ sơ có workflow riêng? | Trung bình |
