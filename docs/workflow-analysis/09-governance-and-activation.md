@@ -61,7 +61,7 @@ Ngay cả khi không còn lỗi mở, workflow chỉ được phép chuyển san
 - Cần đủ thời gian để tester phát hiện các lỗi tiềm ẩn, edge case
 - Tránh tình trạng "publish vội" sau khi đóng hết lỗi nhưng chưa test kỹ
 
-> **Giá trị mặc định đề xuất:** 7 ngày (có thể do admin cấu hình theo từng loại workflow)
+> **Giá trị mặc định:** 15 ngày (có thể do admin cấu hình theo từng loại workflow)
 
 ---
 
@@ -138,7 +138,7 @@ Ví dụ: `v1.0` → `v1.1` (sửa notification) → `v2.0` (thêm bước phê 
 | 1 | Admin publish workflow có lỗi, ảnh hưởng đến hồ sơ thật của người dùng | Cao | Chặn publish khi còn issue mở; yêu cầu xác nhận từ tester |
 | 2 | Admin sửa trực tiếp workflow ACTIVE, gây nhầm lẫn cho hồ sơ đang xử lý | Cao | Khóa chỉnh sửa khi ACTIVE; bắt buộc tạo phiên bản mới |
 | 3 | Người dùng cuối nộp hồ sơ theo workflow đang test, tạo dữ liệu sai | Cao | Ẩn workflow TESTING khỏi giao diện người dùng cuối |
-| 4 | Workflow bị deactivate khẩn cấp khi có hồ sơ đang xử lý dở | Trung bình | Admin có quyền deactivate không cần approval; cần có hướng dẫn xử lý hồ sơ dở; không tự động hủy hồ sơ |
+| 4 | Workflow bị deactivate khẩn cấp khi có hồ sơ đang xử lý dở | Trung bình | Admin có quyền deactivate không cần approval; hồ sơ dở được chuyển vào lưu trữ tồn đọng; không tự động hủy hồ sơ |
 | 5 | Tester xác nhận test nhưng chưa cover đủ các tình huống | Trung bình | Quy định checklist test tối thiểu; lưu evidence |
 | 6 | Nhiều phiên bản workflow tồn tại song song gây nhầm lẫn cho cán bộ | Thấp | Hiển thị rõ phiên bản trên giao diện xử lý hồ sơ |
 | 7 | Audit log không đầy đủ, không truy xuất được ai đã publish/deactivate | Trung bình | Ghi đầy đủ audit log: ai, khi nào, thao tác gì |
@@ -164,8 +164,8 @@ Trước khi admin thực hiện thao tác Publish, nên kiểm tra:
 
 | # | Câu hỏi | Mức độ ưu tiên | Câu trả lời |
 |---|---------|----------------|-------------|
-| 1 | Thời gian thử nghiệm tối thiểu mặc định là bao lâu? Admin có được cấu hình không? | Cao | Đang chờ xác nhận |
+| 1 | Thời gian thử nghiệm tối thiểu mặc định là bao lâu? Admin có được cấu hình không? | Cao | **15 ngày** (admin có thể cấu hình theo từng loại workflow) |
 | 2 | Ai có quyền DEACTIVATE khẩn cấp workflow đang ACTIVE? Cần approval flow không? | Cao | **Admin – không cần approval flow** |
-| 3 | Hồ sơ đang dở khi deactivate khẩn cấp: tự động hủy, giữ nguyên, hay cần admin xử lý từng cái? | Cao | Đang chờ xác nhận |
-| 4 | Có cần bước phê duyệt từ cấp trên trước khi admin được publish không? | Trung bình | Đang chờ xác nhận |
-| 5 | Audit log cần lưu bao lâu? Có quy định pháp lý nào liên quan không? | Trung bình | Đang chờ xác nhận |
+| 3 | Hồ sơ đang dở khi deactivate khẩn cấp: tự động hủy, giữ nguyên, hay cần admin xử lý từng cái? | Cao | **Cho vào lưu trữ tồn đọng** |
+| 4 | Có cần bước phê duyệt từ cấp trên trước khi admin được publish không? | Trung bình | **Không cần** |
+| 5 | Audit log cần lưu bao lâu? Có quy định pháp lý nào liên quan không? | Trung bình | **1 tuần** trong hot storage, sau đó chuyển vào lưu trữ tồn đọng |

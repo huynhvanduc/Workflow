@@ -164,10 +164,10 @@ Trong giai đoạn TESTING, nhóm tester phải thực hiện và xác nhận í
 
 ## Câu hỏi cần chốt thêm
 
-| # | Câu hỏi | Mức độ ưu tiên |
-|---|---------|----------------|
-| 1 | Thời gian test tối thiểu mặc định là bao nhiêu? Admin có được cấu hình khác không? | Cao |
-| 2 | Nếu admin chỉnh sửa cấu hình trong lúc TESTING, có cần reset thời gian test không? | Cao |
-| 3 | Tester có cần checklist rõ ràng bắt buộc, hay tự do test theo hiểu biết? | Trung bình |
-| 4 | Có cần lưu evidence kiểm thử (screenshot, file log) không, hay chỉ cần xác nhận trong hệ thống? | Trung bình |
-| 5 | Nếu tester phát hiện lỗi nghiêm trọng sau khi đã ký xác nhận, có cơ chế thu hồi xác nhận không? | Trung bình |
+| # | Câu hỏi | Mức độ ưu tiên | Câu trả lời |
+|---|---------|----------------|-------------|
+| 1 | Thời gian test tối thiểu mặc định là bao nhiêu? Admin có được cấu hình khác không? | Cao | **15 ngày** (admin có thể cấu hình) |
+| 2 | Nếu admin chỉnh sửa cấu hình trong lúc TESTING, có cần reset thời gian test không? | Cao |  |
+| 3 | Tester có cần checklist rõ ràng bắt buộc, hay tự do test theo hiểu biết? | Trung bình |  |
+| 4 | Có cần lưu evidence kiểm thử (screenshot, file log) không, hay chỉ cần xác nhận trong hệ thống? | Trung bình |  |
+| 5 | Nếu tester phát hiện lỗi nghiêm trọng sau khi đã ký xác nhận, có cơ chế thu hồi xác nhận không? | Trung bình |  |
